@@ -16,12 +16,5 @@ export default (history, initialState) => {
     clientDev && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   ].filter(x => x))
 
-  if (clientDev && module.hot) {
-    module.hot.accept('sleipnir', () => {
-      const nextRootReducer = require('sleipnir').default
-      store.replaceReducer(nextRootReducer)
-    })
-  }
-
   return store
 }
