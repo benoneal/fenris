@@ -1,18 +1,17 @@
 
 # Fenris
 
-A production-ready starter kit for modern universal apps developed to solve the problems of an actual production application. 
+A production-ready library for rendering universal apps developed to solve the problems of an actual production application. 
 
 Uses `naglfar` and `sleipnir` modules, exposing their functionality to drastically speed up app development. 
 
 - Server-side rendering
 - React view
-- Custom redux-based router
+- Redux-based router (naglfar)
+- Powerful thunk-driven action creators (sleipnir)
 - Express server
 - CSS-in-JS hooks (library agnostic)
 - Client and server caching of data and rendered html
-- Both client and server are Webpack 2 bundled
-- Full ES2017 support throughout
 - Hot reloading in development
 - Full control of rendered html through `react-helmet`
 - CSRF security on all internal api requests
@@ -21,7 +20,7 @@ Uses `naglfar` and `sleipnir` modules, exposing their functionality to drastical
 Fenris has no opinion/implementation for: 
 
 - Linting
-- Standard CSS
+- Regular CSS
 - Testing
 
 ## How to use
@@ -243,5 +242,3 @@ const serverConfig = {
 
 module.exports = [clientConfig, serverConfig]
 ```
-
-That's it. 
