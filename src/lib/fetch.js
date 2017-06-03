@@ -9,7 +9,7 @@ const config = {
 
 const getCookie = (name) => {
   const match = document.cookie.match(new RegExp(name + '=([^;]+)'))
-  return match.length ? match[1] : ''
+  return (match && match.length > 1) ? match[1] : ''
 }
 
 if (typeof window !== 'undefined') {

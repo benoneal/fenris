@@ -1,6 +1,6 @@
 {
   "name": "fenris",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Universal app creator",
   "repository": "https://github.com/benoneal/fenris",
   "main": "dist/index.js",
@@ -36,7 +36,7 @@
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
-    "electrode-csrf-jwt": "^1.2.1",
+    "electrode-csrf-jwt": "1.2.0",
     "express": "^4.15.2",
     "history": "^4.6.1",
     "lodash": "^4.17.4",
