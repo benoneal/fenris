@@ -7,6 +7,15 @@ const config = {
   xsrfHeaderName: 'x-csrf-jwt'
 }
 
+const getCookie = (name) => {
+  const match = document.cookie.match(new RegExp(name + '=([^;]+)'))
+  return match.length ? match[1] : ''
+}
+
+if (typeof window !== 'undefined') {
+  axios.defaults.headers.post[config.xsrfHeaderName] = getCookie(config.xsrfCookieName)
+}
+
 const getData = ({data}) => data
 const setCSRFHeader = (res) => {
   axios.defaults.headers.post[config.xsrfHeaderName] = res.headers[config.xsrfHeaderName]

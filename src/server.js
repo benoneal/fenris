@@ -23,14 +23,17 @@ const csrfConfig = {
   
 const server = express()
 
+server.set('trust proxy', 'loopback')
 server.use(compression())
 server.use(bodyParser.json())
 server.use(cookieParser())
 server.use(csrf(csrfConfig))
 export const attachMiddleware = server.use
 
-const createEndpoint = (method) => (endpoint, promise) => {
-  server[method](endpoint, (req, res) => {
+const defaultMiddleware = (req, res, next) => next()
+
+const createEndpoint = (method) => (endpoint, promise, middleware = defaultMiddleware) => {
+  server[method](endpoint, middleware, (req, res) => {
     promise({
       ...req.params,
       ...req.body,
@@ -45,6 +48,19 @@ const createEndpoint = (method) => (endpoint, promise) => {
 
 export const getEndpoint = createEndpoint('get')
 export const postEndpoint = createEndpoint('post')
+export const downloadEndpoint = (endpoint, promise, middleware = defaultMiddleware) => {
+  server.get(endpoint, middleware, (req, res) => {
+    promise({
+      ...req.params,
+      ...req.body,
+      ...req.query,
+      cookies: req.cookies
+    }).then(
+      ({url, fileName, done}) => res.status(200).download(url, fileName || url, done),
+      (error) => res.status(500).json(error)
+    )
+  })
+}
 
 // options: {
 //   AppComponent,
