@@ -14,7 +14,6 @@ Uses `naglfar` and `sleipnir` modules, exposing their functionality to drastical
 - Client and server caching of data and rendered html
 - Hot reloading in development
 - Full control of rendered html through `react-helmet`
-- CSRF security on all internal api requests
 - BelowTheFold component for ssr optimization
 
 Fenris has no opinion/implementation for: 

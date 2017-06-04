@@ -6,7 +6,6 @@ import hot from 'webpack-hot-middleware'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
-import {expressMiddleware as csrf} from 'electrode-csrf-jwt'
 import uuid from 'uuid/v4'
 import renderMiddleware from './lib/renderMiddleware'
 
@@ -16,18 +15,12 @@ process.on('unhandledRejection', (reason, p) => {
   else console.error('Unhandled Rejection at: Promise ', p, ' reason: ', reason)
 })
 
-const csrfConfig = {
-  secret: process.env.CSRF_SECRET || uuid(),
-  expiresIn: 60 * 60 * 4
-}
-  
 const server = express()
 
 server.set('trust proxy', 'loopback')
 server.use(compression())
 server.use(bodyParser.json())
 server.use(cookieParser())
-server.use(csrf(csrfConfig))
 export const attachMiddleware = (middleware) => {
   server.use(middleware)
 }
