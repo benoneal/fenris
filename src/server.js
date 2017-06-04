@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser'
 import compression from 'compression'
 import uuid from 'uuid/v4'
 import renderMiddleware from './lib/renderMiddleware'
+import csrfMiddleware from './lib/csrfMiddleware'
 
 global.ENVIRONMENT = process.env.NODE_ENV || 'default'
 process.on('unhandledRejection', (reason, p) => {
@@ -21,6 +22,7 @@ server.set('trust proxy', 'loopback')
 server.use(compression())
 server.use(bodyParser.json())
 server.use(cookieParser())
+server.use(csrfMiddleware)
 export const attachMiddleware = (middleware) => {
   server.use(middleware)
 }
