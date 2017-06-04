@@ -28,7 +28,9 @@ server.use(compression())
 server.use(bodyParser.json())
 server.use(cookieParser())
 server.use(csrf(csrfConfig))
-export const attachMiddleware = server.use
+export const attachMiddleware = (middleware) => {
+  server.use(middleware)
+}
 
 const defaultMiddleware = (req, res, next) => next()
 
