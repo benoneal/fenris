@@ -36,7 +36,7 @@ const normalizedPromises = (routePromise, handleSuccess) => (req, res) => {
     ...res.locals,
     cookies: req.cookies
   }).then(
-    handleSuccess,
+    handleSuccess(res),
     (error) => res.status(500).json(error)
   )
 }
@@ -51,7 +51,7 @@ const createEndpoint = (method, successHandler = sendJSON) => (endpoint, promise
     middleware, 
     normalizedPromises(
       promise, 
-      successHandler(res)
+      successHandler
     )
   )
 }

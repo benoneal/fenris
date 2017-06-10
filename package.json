@@ -1,6 +1,6 @@
 {
   "name": "fenris",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Universal app creator",
   "repository": "https://github.com/benoneal/fenris",
   "main": "dist/index.js",
