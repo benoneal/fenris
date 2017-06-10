@@ -28,36 +28,37 @@ export const attachMiddleware = (middleware) => {
 }
 
 const defaultMiddleware = (req, res, next) => next()
+const normalizedPromises = (routePromise, handleSuccess) => (req, res) => {
+  routePromise({
+    ...req.params,
+    ...req.body,
+    ...req.query,
+    ...res.locals,
+    cookies: req.cookies
+  }).then(
+    handleSuccess,
+    (error) => res.status(500).json(error)
+  )
+}
+const sendJSON = (res) => (data) => 
+  res.status(200).json(data)
+const sendDownload = (res) => ({url, fileName, done}) => 
+  res.status(200).download(url, fileName || url, done)
 
-const createEndpoint = (method) => (endpoint, promise, middleware = defaultMiddleware) => {
-  server[method](endpoint, middleware, (req, res) => {
-    promise({
-      ...req.params,
-      ...req.body,
-      ...req.query,
-      cookies: req.cookies
-    }).then(
-      (data) => res.status(200).json(data),
-      (error) => res.status(500).json(error)
+const createEndpoint = (method, successHandler = sendJSON) => (endpoint, promise, middleware = defaultMiddleware) => {
+  server[method](
+    endpoint, 
+    middleware, 
+    normalizedPromises(
+      promise, 
+      successHandler(res)
     )
-  })
+  )
 }
 
 export const getEndpoint = createEndpoint('get')
 export const postEndpoint = createEndpoint('post')
-export const downloadEndpoint = (endpoint, promise, middleware = defaultMiddleware) => {
-  server.get(endpoint, middleware, (req, res) => {
-    promise({
-      ...req.params,
-      ...req.body,
-      ...req.query,
-      cookies: req.cookies
-    }).then(
-      ({url, fileName, done}) => res.status(200).download(url, fileName || url, done),
-      (error) => res.status(500).json(error)
-    )
-  })
-}
+export const downloadEndpoint = createEndpoint('get', sendDownload)
 
 // options: {
 //   AppComponent,

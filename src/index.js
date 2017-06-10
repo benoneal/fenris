@@ -1,6 +1,7 @@
 export {
   constants, 
-  createAction
+  createAction,
+  getInitialState
 } from 'sleipnir'
 
 export {

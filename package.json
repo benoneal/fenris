@@ -1,6 +1,6 @@
 {
   "name": "fenris",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Universal app creator",
   "repository": "https://github.com/benoneal/fenris",
   "main": "dist/index.js",
@@ -11,9 +11,11 @@
     "test": "standard && mocha"
   },
   "keywords": [
-    "i18n",
     "react",
-    "translation"
+    "isomorphic",
+    "universal",
+    "express",
+    "redux"
   ],
   "author": "Ben O'Neal",
   "license": "MIT",
@@ -28,7 +30,6 @@
     "babel-register": "^6.9.0",
     "bundle-size": "^0.6.0",
     "mocha": "^3.2.0",
-    "redux-mock-store": "^1.2.3",
     "standard": "^7.1.2"
   },
   "dependencies": {
@@ -48,7 +49,7 @@
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
-    "sleipnir": "^1.0.0",
+    "sleipnir": "^1.0.1",
     "uuid": "^3.0.1",
     "uuid-validate": "^0.0.2",
     "webpack": "^2.5.1",
