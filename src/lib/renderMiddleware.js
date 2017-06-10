@@ -4,7 +4,6 @@ import Helmet from 'react-helmet'
 import {Provider} from 'react-redux'
 import createHistory from 'history/createMemoryHistory'
 import {resolveLocation} from 'naglfar'
-import {getInitialState} from 'sleipnir'
 import Root from './Root'
 import configureStore from './configureStore'
 import {getCache, fetchData, cacheData} from './cache'
@@ -57,7 +56,7 @@ export default (config) => (req, res) => {
     path: req.url, 
     store: configureStore(
       createHistory({initialEntries: [req.url]}),
-      getInitialState(res.locals.initialState)
+      res.locals.initialState
     )
   })
 }
