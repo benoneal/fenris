@@ -32,7 +32,7 @@ const renderHtml = ({AppComponent, store, bundle, baseCss, cssToString}) => {
   return `<!doctype html>\n${rootMarkup}`
 }
 
-const resolveRoute = ({path, res, cachePerUrl = true, ...config}) => {
+const resolveRoute = ({path, res, cachePerUrl = false, ...config}) => {
   if (cachePerUrl) {
     const cachedHtml = fetchData(renderCache, path)
     if (cachedHtml) return res.status(200).send(cachedHtml)
@@ -52,7 +52,7 @@ export default (config) => (req, res) => {
   resolveRoute({
     ...config, 
     res, 
-    cachePerUrl: !res.locals.initialState || config.cachePerUrl,
+    cachePerUrl: res.locals.initialState ? false : config.cachePerUrl,
     path: req.url, 
     store: configureStore(
       createHistory({initialEntries: [req.url]}),
