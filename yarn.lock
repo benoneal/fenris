@@ -2923,9 +2923,9 @@ mute-stream@0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.5.tgz#8fbfabb0a98a253d3184331f9e8deb7372fac6c0"
 
-naglfar@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/naglfar/-/naglfar-1.0.4.tgz#a394474bc74e6e647580113e218ecf4c393b06e8"
+naglfar@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/naglfar/-/naglfar-1.1.0.tgz#5dc13e80329201a82a5555eba9f6102b91f2849d"
   dependencies:
     lodash "^4.17.4"
     qs "^6.4.0"
