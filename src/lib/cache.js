@@ -1,7 +1,6 @@
 import curry from 'lodash/curry'
 
-const CLIENT_CACHE_TIME = 15
-const SERVER_CACHE_TIME = 8 * 60
+const FIFTEEN_MINUTES = 15
 
 let apiCache = {}
 
@@ -45,8 +44,7 @@ const expiringCache = curry((minutes, fn, keyGen = defaultStringify) => (...args
   return cache(result, typeof result)
 })
 
-const cacheDuration = typeof document === 'undefined' ? SERVER_CACHE_TIME : CLIENT_CACHE_TIME
-export const fetchCache = expiringCache(cacheDuration)
+export const fetchCache = expiringCache(FIFTEEN_MINUTES)
 
 export const getCache = () => {
   const cache = apiCache

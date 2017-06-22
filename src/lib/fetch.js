@@ -1,6 +1,8 @@
 import axios from 'axios'
 import {fetchCache} from './cache'
 
+const IS_BROWSER = typeof window !== 'undefined'
+
 const config = {
   credentials: 'same-origin',
   xsrfCookieName: 'x-csrf',
@@ -12,7 +14,7 @@ const getCookie = (name) => {
   return (match && match.length > 1) ? match[1] : ''
 }
 
-if (typeof window !== 'undefined') {
+if (IS_BROWSER) {
   axios.defaults.headers.post[config.xsrfHeaderName] = getCookie(config.xsrfCookieName)
 }
 
@@ -23,4 +25,4 @@ const setCSRFHeader = (res) => {
 }
 export const post = (url, data, options) => axios.post(url, data, {...config, ...options}).then(getData)
 export const get = (url, options) => axios.get(url, {...config, ...options}).then(setCSRFHeader).then(getData)
-export const cachedGet = fetchCache(get)
+export const cachedGet = IS_BROWSER ? fetchCache(get) : get

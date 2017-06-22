@@ -39,9 +39,7 @@ const resolveRoute = ({path, res, cachePerUrl = false, ...config}) => {
   }
   resolveLocation(path, config.store.dispatch)
     .then(({status, url}) => {
-      if (url) {
-        return res.redirect(status, url)
-      }
+      if (url) return res.redirect(status, url)
       const html = renderHtml(config)
       cachePerUrl && cacheData(renderCache, 8 * 60, path, html, typeof html)
       res.status(status).send(html)
