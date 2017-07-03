@@ -44,6 +44,8 @@ const sendJSON = (res) => (data) =>
   res.status(200).json(data)
 const sendDownload = (res) => ({url, fileName, done}) => 
   res.status(200).download(url, fileName || url, done)
+const sendHTML = (res) => (data) =>
+  res.status(200).send(data)
 
 const createEndpoint = (method, successHandler = sendJSON) => (endpoint, promise, middleware = defaultMiddleware) => {
   server[method](
@@ -59,6 +61,7 @@ const createEndpoint = (method, successHandler = sendJSON) => (endpoint, promise
 export const getEndpoint = createEndpoint('get')
 export const postEndpoint = createEndpoint('post')
 export const downloadEndpoint = createEndpoint('get', sendDownload)
+export const htmlEndpoint = createEndpoint('get', sendHTML)
 
 // options: {
 //   AppComponent,
