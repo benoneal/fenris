@@ -1,6 +1,6 @@
 {
   "name": "fenris",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Universal app creator",
   "repository": "https://github.com/benoneal/fenris",
   "main": "dist/index.js",
@@ -52,9 +52,9 @@
     "sleipnir": "^1.0.1",
     "uuid": "^3.0.1",
     "uuid-validate": "^0.0.2",
-    "webpack": "^2.5.1",
-    "webpack-dev-middleware": "^1.10.2",
-    "webpack-hot-middleware": "^2.18.0"
+    "webpack": "^3.2.0",
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-hot-middleware": "^2.18.2"
   },
   "standard": {
     "parser": "babel-eslint"
