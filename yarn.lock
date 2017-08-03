@@ -3475,13 +3475,9 @@ q@^1.1.2:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.0.tgz#dd01bac9d06d30e6f219aecb8253ee9ebdc308f1"
 
-qs@6.4.0, qs@~6.4.0:
+qs@6.4.0, qs@^6.4.0, qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
-
-qs@^6.4.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
 
 querystring-es3@^0.2.0, querystring-es3@~0.2.0:
   version "0.2.1"
@@ -3953,9 +3949,16 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-sleipnir@^1.0.0, sleipnir@^1.0.1:
+sleipnir@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/sleipnir/-/sleipnir-1.0.1.tgz#930431c2782ca217560072325fd3d185a4ec0e0d"
+  dependencies:
+    deepmerge "^1.3.2"
+    redux-thunk "^2.2.0"
+
+sleipnir@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/sleipnir/-/sleipnir-1.0.2.tgz#9d56c2923dfa486c2e862c4670ce18d97a8c4522"
   dependencies:
     deepmerge "^1.3.2"
     redux-thunk "^2.2.0"
