@@ -12,10 +12,10 @@ const rehydrate = (key) => (
   isClient ? window[key] : {}
 )
 
-isClient && setCache(rehydrate('FETCH_CACHE'))
-const store = isClient && configureStore(createHistory(), rehydrate('INITIAL_STATE'))
-
 export default (AppComponent) => {
+  isClient && setCache(rehydrate('FETCH_CACHE'))
+  const store = isClient && configureStore(createHistory(), rehydrate('INITIAL_STATE'))
+
   render(
     <HotLoader>
       <Provider store={store}>
