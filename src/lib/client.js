@@ -12,9 +12,9 @@ const rehydrate = (key) => (
   isClient ? window[key] : {}
 )
 
-export default (AppComponent) => {
+export default (AppComponent, customMiddleware) => {
   isClient && setCache(rehydrate('FETCH_CACHE'))
-  const store = isClient && configureStore(createHistory(), rehydrate('INITIAL_STATE'))
+  const store = isClient && configureStore(createHistory(), rehydrate('INITIAL_STATE'), customMiddleware)
 
   render(
     <HotLoader>

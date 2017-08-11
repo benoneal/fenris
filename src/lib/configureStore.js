@@ -4,10 +4,12 @@ import logger from 'redux-logger'
 import router, {buildLocationState} from 'naglfar'
 import reducer, {getInitialState, middleware as sleipnirMiddleware} from 'sleipnir'
 
+const {isArray} = Array
 const clientDev = typeof document !== 'undefined' && process.env.NODE_ENV !== 'production'
+const toArray = (arg) => isArray(arg) ? arg : [arg]
 
-export default (history, initialState) => {
-  const middleware = [sleipnirMiddleware, router(history), clientDev && logger].filter(x => x)
+export default (history, initialState, customMiddleware = []) => {
+  const middleware = [sleipnirMiddleware, router(history), ...toArray(customMiddleware), clientDev && logger].filter(Boolean)
   const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore)
 
   const store = createStoreWithMiddleware(...[

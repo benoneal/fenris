@@ -112,4 +112,6 @@ export default ({AppComponent, port, config, ...options}) => {
     }
     console.info(`⚡⚡⚡ Server running on http://localhost:${port}/`)
   })
+
+  return server
 }
