@@ -1,4 +1,5 @@
 import path from 'path'
+import {Server} from 'http'
 import express from 'express'
 import webpack from 'webpack'
 import dev from 'webpack-dev-middleware'
@@ -16,15 +17,15 @@ process.on('unhandledRejection', (reason, p) => {
   else console.error('Unhandled Rejection at: Promise ', p, ' reason: ', reason)
 })
 
-const server = express()
+const app = express()
 
-server.set('trust proxy', 'loopback')
-server.use(compression())
-server.use(bodyParser.json())
-server.use(cookieParser())
-server.use(csrfMiddleware)
+app.set('trust proxy', 'loopback')
+app.use(compression())
+app.use(bodyParser.json())
+app.use(cookieParser())
+app.use(csrfMiddleware)
 export const attachMiddleware = (middleware) => {
-  server.use(middleware)
+  app.use(middleware)
 }
 
 const defaultMiddleware = (req, res, next) => next()
@@ -50,7 +51,7 @@ const sendRedirect = (res) => ({url}) =>
   res.redirect(url)
 
 const createEndpoint = (method, successHandler = sendJSON) => (endpoint, promise, middleware = defaultMiddleware) => {
-  server[method](
+  app[method](
     endpoint, 
     middleware, 
     normalizedPromises(
@@ -78,7 +79,7 @@ export default ({AppComponent, port, config, ...options}) => {
   port = port || process.env.PORT || 3000
 
   if (process.env.NODE_ENV !== 'production') {
-    if (!config) throw new Error('Dev config not supplied for development server')
+    if (!config) throw new Error('Dev config not supplied for development app')
     const compiler = webpack({
       ...config,
       output: {
@@ -87,7 +88,7 @@ export default ({AppComponent, port, config, ...options}) => {
       }
     })
 
-    server.use(dev(compiler, {
+    app.use(dev(compiler, {
       publicPath: config.output.publicPath,
       stats: {
         colors: true,
@@ -98,12 +99,14 @@ export default ({AppComponent, port, config, ...options}) => {
         modules: false,
       },
     }))
-    server.use(hot(compiler))
+    app.use(hot(compiler))
   }
 
-  server.use(express.static(config.output.path))
+  app.use(express.static(config.output.path))
 
-  server.get('*', renderMiddleware({AppComponent, bundle: config.output.filename, ...options}))
+  app.get('*', renderMiddleware({AppComponent, bundle: config.output.filename, ...options}))
+
+  const server = Server(app)
 
   server.listen(port, (err) => {
     if (err) {
