@@ -8,8 +8,9 @@ export {
   routeRedirect, 
   routeFragment, 
   registerRoute, 
+  whitelist,
   Link,
-  Fragment
+  Fragment,
 } from 'naglfar'
 
 export {

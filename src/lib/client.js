@@ -1,6 +1,6 @@
 /* global window, document */
 import React from 'react'
-import {render} from 'react-dom'
+import {hydrate} from 'react-dom'
 import {AppContainer as HotLoader} from 'react-hot-loader'
 import {Provider} from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
@@ -8,15 +8,13 @@ import configureStore from './configureStore'
 import {setCache} from './cache'
 
 const isClient = typeof window !== 'undefined'
-const rehydrate = (key) => (
-  isClient ? window[key] : {}
-)
+const rehydrate = (key) => isClient ? window[key] : {}
 
-export default (AppComponent, customMiddleware) => {
+export default (AppComponent, customMiddleware, enableLogging = true) => {
   isClient && setCache(rehydrate('FETCH_CACHE'))
-  const store = isClient && configureStore(createHistory(), rehydrate('INITIAL_STATE'), customMiddleware)
+  const store = isClient && configureStore(createHistory(), rehydrate('INITIAL_STATE'), customMiddleware, enableLogging)
 
-  render(
+  hydrate(
     <HotLoader>
       <Provider store={store}>
         <AppComponent />
