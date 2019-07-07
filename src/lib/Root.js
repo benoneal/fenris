@@ -1,18 +1,12 @@
-/* globals ENVIRONMENT */
 import React from 'react'
-
-const dehydrate = (data, key) => (
-  <script dangerouslySetInnerHTML={{__html: `window.${key} = ${data}`}} />
-)
 
 const Root = ({
   head,
   baseStyles,
-  renderJSStyles,
+  StyleComponent,
   content,
-  fetchCache,
   initialState,
-  bundle
+  jsSource
 }) => (
   <html {...head.htmlAttributes.toComponent()}>
     <head>
@@ -42,15 +36,13 @@ const Root = ({
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       <link rel="shortcut icon" href="/favicon.ico" />
       {baseStyles && <style dangerouslySetInnerHTML={{__html: baseStyles}} />}
-      {renderJSStyles && <style id="stylesheet" dangerouslySetInnerHTML={{__html: renderJSStyles()}} />}
+      {StyleComponent && <StyleComponent />}
+      {initialState && <meta data-initial-state={initialState} />}
     </head>
     <body {...head.bodyAttributes.toComponent()}>
       <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
-      {dehydrate(`'${ENVIRONMENT}'`, 'ENVIRONMENT')}
-      {initialState && dehydrate(JSON.stringify(initialState), 'INITIAL_STATE')}
-      {fetchCache && dehydrate(JSON.stringify(fetchCache), 'FETCH_CACHE')}
       {head.script.toComponent()}
-      <script src={'/' + bundle} />
+      <script src={'/' + jsSource} />
     </body>
   </html>
 )

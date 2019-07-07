@@ -1,7 +1,11 @@
 import React from 'react'
 
-const isServer = typeof process === 'object' && Object.prototype.toString.call(process) === '[object process]'
+const isBrowser = (
+  typeof module === 'undefined' &&
+  self && !self.module &&
+  typeof window !== 'undefined'
+  && typeof document !== 'undefined'
+  && document.nodeType === 9
+)
 
-const BelowTheFold = ({children}) => !isServer && <div>{children}</div>
-
-export default BelowTheFold
+export const BelowTheFold = ({children}) => isBrowser && <>{children}</>

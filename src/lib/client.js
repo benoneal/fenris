@@ -1,25 +1,35 @@
-/* global window, document */
 import React from 'react'
 import {hydrate} from 'react-dom'
-import {AppContainer as HotLoader} from 'react-hot-loader'
 import {Provider} from 'react-redux'
-import createHistory from 'history/createBrowserHistory'
+import {createBrowserHistory} from 'history'
 import configureStore from './configureStore'
-import {setCache} from './cache'
 
-const isClient = typeof window !== 'undefined'
-const rehydrate = (key) => isClient ? window[key] : {}
+const rehydrateState = _ => {
+  try {
+    return JSON.parse(atob(document.querySelectorAll('[data-initial-state]')[0].dataset.initialState))
+  } catch (e) {
+    return {}
+  }
+}
 
-export default (AppComponent, customMiddleware, enableLogging = true) => {
-  isClient && setCache(rehydrate('FETCH_CACHE'))
-  const store = isClient && configureStore(createHistory(), rehydrate('INITIAL_STATE'), customMiddleware, enableLogging)
+export const renderClient = ({
+  AppComponent,
+  reducer,
+  customMiddleware,
+  enableLogging = process.env.NODE_ENV !== 'production'
+}) => {
+  const store = configureStore({
+    reducer,
+    initialState: rehydrateState(),
+    history: createBrowserHistory(),
+    customMiddleware,
+    enableLogging
+  })
 
   hydrate(
-    <HotLoader>
-      <Provider store={store}>
-        <AppComponent />
-      </Provider>
-    </HotLoader>,
+    <Provider store={store}>
+      <AppComponent />
+    </Provider>,
     document.getElementById('root')
-  ) 
+  )
 }
