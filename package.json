@@ -24,7 +24,15 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/preset-env": "^7.5.0",
     "@babel/preset-react": "^7.0.0",
+    "acorn": "^6.2.1",
     "jest": "^24.8.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "rollup": "^1.16.3",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-buble": "^0.19.6",
@@ -33,10 +41,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-uglify": "^6.0.2"
   },
-  "dependencies": {
-    "abab": "^2.0.0",
-    "history": "^4.9.0",
-    "naglfar": "^2.0.1",
+  "peerDependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
@@ -44,6 +49,11 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0"
+  },
+  "dependencies": {
+    "abab": "^2.0.0",
+    "history": "^4.9.0",
+    "naglfar": "^2.0.2"
   },
   "jest": {
     "testEnvironment": "node"
