@@ -1,6 +1,6 @@
 {
   "name": "fenris",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Universal app rendering and CSRF solution",
   "repository": "https://github.com/benoneal/fenris",
   "main": "index.js",
