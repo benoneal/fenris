@@ -1,1 +1,127 @@
-function _interopDefault(e){return e&&"object"==typeof e&&"default"in e?e.default:e}Object.defineProperty(exports,"__esModule",{value:!0});var router=require("naglfar"),router__default=_interopDefault(router),React=_interopDefault(require("react")),reactDom=require("react-dom"),reactRedux=require("react-redux"),history=require("history"),redux=require("redux"),thunk=_interopDefault(require("redux-thunk")),logger=_interopDefault(require("redux-logger")),isBrowser="undefined"==typeof module&&self&&!self.module&&"undefined"!=typeof window&&"undefined"!=typeof document&&9===document.nodeType,BelowTheFold=function(e){var r=e.children;return isBrowser&&React.createElement(React.Fragment,null,r)};function _defineProperty(e,r,t){return r in e?Object.defineProperty(e,r,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[r]=t,e}function _objectSpread(r){for(var e=1;e<arguments.length;e++){var t=null!=arguments[e]?arguments[e]:{},o=Object.keys(t);"function"==typeof Object.getOwnPropertySymbols&&(o=o.concat(Object.getOwnPropertySymbols(t).filter(function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),o.forEach(function(e){_defineProperty(r,e,t[e])})}return r}function _toConsumableArray(e){return _arrayWithoutHoles(e)||_iterableToArray(e)||_nonIterableSpread()}function _arrayWithoutHoles(e){if(Array.isArray(e)){for(var r=0,t=new Array(e.length);r<e.length;r++)t[r]=e[r];return t}}function _iterableToArray(e){if(Symbol.iterator in Object(e)||"[object Arguments]"===Object.prototype.toString.call(e))return Array.from(e)}function _nonIterableSpread(){throw new TypeError("Invalid attempt to spread non-iterable instance")}var clientDev="undefined"!=typeof document&&"production"!==process.env.NODE_ENV,toArray=function(e){return Array.isArray(e)?e:[e]},configureStore=function(e){var r=e.reducer,t=e.initialState,o=e.history,n=e.customMiddleware,a=void 0===n?[]:n,i=e.enableLogging,u=[thunk,router__default(o)].concat(_toConsumableArray(toArray(a)),[i&&clientDev&&logger]).filter(Boolean);return redux.applyMiddleware.apply(void 0,_toConsumableArray(u))(redux.createStore).apply(void 0,_toConsumableArray([r,_objectSpread({},t,{location:router.buildLocationState(o.location)}),i&&clientDev&&window.__REDUX_DEVTOOLS_EXTENSION__&&window.__REDUX_DEVTOOLS_EXTENSION__()].filter(Boolean)))},rehydrateState=function(e){try{return JSON.parse(atob(document.querySelectorAll("[data-initial-state]")[0].dataset.initialState))}catch(e){return{}}},renderClient=function(e){var r=e.AppComponent,t=e.reducer,o=e.customMiddleware,n=e.enableLogging,a=void 0===n?"production"!==process.env.NODE_ENV:n,i=configureStore({reducer:t,initialState:rehydrateState(),history:history.createBrowserHistory(),customMiddleware:o,enableLogging:a});reactDom.hydrate(React.createElement(reactRedux.Provider,{store:i},React.createElement(r,null)),document.getElementById("root"))};Object.keys(router).forEach(function(e){"default"!==e&&Object.defineProperty(exports,e,{enumerable:!0,get:function(){return router[e]}})}),exports.BelowTheFold=BelowTheFold,exports.renderClient=renderClient;
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var router = require('naglfar');
+var router__default = _interopDefault(router);
+var React = _interopDefault(require('react'));
+var reactDom = require('react-dom');
+var reactRedux = require('react-redux');
+var history = require('history');
+var redux = require('redux');
+var thunk = _interopDefault(require('redux-thunk'));
+var logger = _interopDefault(require('redux-logger'));
+
+var isBrowser = typeof module === 'undefined' && self && !self.module && typeof window !== 'undefined' && typeof document !== 'undefined' && document.nodeType === 9;
+var BelowTheFold = function BelowTheFold(_ref) {
+  var children = _ref.children;
+  return isBrowser && React.createElement(React.Fragment, null, children);
+};
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      _defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+}
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+var clientDev = typeof document !== 'undefined' && process.env.NODE_ENV !== 'production';
+var toArray = function toArray(arg) {
+  return Array.isArray(arg) ? arg : [arg];
+};
+var configureStore = (function (_ref) {
+  var reducer = _ref.reducer,
+      initialState = _ref.initialState,
+      history = _ref.history,
+      _ref$customMiddleware = _ref.customMiddleware,
+      customMiddleware = _ref$customMiddleware === void 0 ? [] : _ref$customMiddleware,
+      enableLogging = _ref.enableLogging;
+  var middleware = [thunk, router__default(history)].concat(_toConsumableArray(toArray(customMiddleware)), [enableLogging && clientDev && logger]).filter(Boolean);
+  var createStoreWithMiddleware = redux.applyMiddleware.apply(void 0, _toConsumableArray(middleware))(redux.createStore);
+  return createStoreWithMiddleware.apply(void 0, _toConsumableArray([reducer, _objectSpread({}, initialState, {
+    location: router.buildLocationState(history.location)
+  }), enableLogging && clientDev && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()].filter(Boolean)));
+});
+
+var rehydrateState = function rehydrateState(_) {
+  try {
+    return JSON.parse(atob(document.querySelectorAll('[data-initial-state]')[0].dataset.initialState));
+  } catch (e) {
+    return {};
+  }
+};
+var renderClient = function renderClient(_ref) {
+  var AppComponent = _ref.AppComponent,
+      reducer = _ref.reducer,
+      customMiddleware = _ref.customMiddleware,
+      _ref$enableLogging = _ref.enableLogging,
+      enableLogging = _ref$enableLogging === void 0 ? process.env.NODE_ENV !== 'production' : _ref$enableLogging;
+  var store = configureStore({
+    reducer: reducer,
+    initialState: rehydrateState(),
+    history: history.createBrowserHistory(),
+    customMiddleware: customMiddleware,
+    enableLogging: enableLogging
+  });
+  reactDom.hydrate(React.createElement(reactRedux.Provider, {
+    store: store
+  }, React.createElement(AppComponent, null)), document.getElementById('root'));
+};
+
+Object.keys(router).forEach(function (k) {
+  if (k !== 'default') Object.defineProperty(exports, k, {
+    enumerable: true,
+    get: function () {
+      return router[k];
+    }
+  });
+});
+exports.BelowTheFold = BelowTheFold;
+exports.renderClient = renderClient;

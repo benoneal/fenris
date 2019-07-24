@@ -1,6 +1,5 @@
 import buble from 'rollup-plugin-buble'
 import babel from 'rollup-plugin-babel'
-import {uglify} from 'rollup-plugin-uglify'
 import cleanup from 'rollup-plugin-cleanup'
 import pack from './package.json'
 
@@ -16,12 +15,7 @@ const plugins = [
     ],
   }),
   cleanup(),
-  buble({objectAssign: 'Object.assign'}),
-  uglify({
-    sourcemap: false,
-    mangle: true,
-    compress: {negate_iife: false, expression: true},
-  }),
+  buble({objectAssign: 'Object.assign'})
 ]
 
 export default [{
@@ -33,10 +27,7 @@ export default [{
     format: 'cjs',
     exports: 'named',
     globals: {react: 'React'},
-    strict: false,
-    treeshake: {
-      pureExternalModules: true,
-    }
+    strict: false
   }
 }, {
   input: 'src/server.js',
@@ -47,9 +38,6 @@ export default [{
     format: 'cjs',
     exports: 'named',
     globals: {react: 'React'},
-    strict: false,
-    treeshake: {
-      pureExternalModules: true,
-    }
+    strict: false
   }
 }]
