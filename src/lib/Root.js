@@ -31,8 +31,8 @@ const Root = ({
       <meta name="msapplication-TileColor" content="#fff" />
       <meta name="msapplication-TileImage" content="mstile-144x144.png" />
       <meta name="msapplication-config" content="browserconfig.xml" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       <link rel="shortcut icon" href="/favicon.ico" />
       {baseStyles && <style dangerouslySetInnerHTML={{__html: baseStyles}} />}
@@ -42,7 +42,7 @@ const Root = ({
     <body {...head.bodyAttributes.toComponent()}>
       <div id="root" dangerouslySetInnerHTML={{ __html: content }} />
       {head.script.toComponent()}
-      <script src={'/' + jsSource} />
+      <script src={jsSource} />
     </body>
   </html>
 )

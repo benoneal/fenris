@@ -51,7 +51,7 @@ describe('Fenris', () => {
       AppComponent,
       StyleComponent,
       baseCss: '.t {color: red;}',
-      jsSource: 'script.js',
+      jsSource: '/script.js',
     })
     const {body, status} = await renderRoute({url: '/test', initialState: {test: 123}})
     expect(status).toBe(200)
