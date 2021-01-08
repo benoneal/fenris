@@ -1,6 +1,6 @@
 import React from 'react'
 import {renderToString, renderToStaticMarkup} from 'react-dom/server'
-import Helmet from 'react-helmet'
+import {Helmet} from "react-helmet"
 import {Provider} from 'react-redux'
 import {createMemoryHistory} from 'history'
 import {btoa} from 'abab'

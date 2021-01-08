@@ -35,7 +35,7 @@ App example
 
 ```js
 import React from 'react'
-import Helmet from 'react-helmet'
+import {Helmet} from "react-helmet"
 import {Link} from 'fenris'
 import Home from './pages/Home'
 import User from './pages/User'
