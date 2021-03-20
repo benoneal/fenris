@@ -1,6 +1,6 @@
 import React from 'react'
 import {renderToString} from 'react-dom/server'
-import {Helmet} from "react-helmet"
+import {Helmet} from 'react-helmet'
 import {useSelector} from 'react-redux'
 import {BelowTheFold, registerRoute, renderClient} from '../src/'
 import {csrfCreator, routeRenderer} from '../src/server'
